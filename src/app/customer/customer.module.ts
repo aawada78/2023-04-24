@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BookingHistoryComponent } from './booking-history/booking-history.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { ClickWithWarningDirective, TooltipDirective } from '../shared';
 
 export const CUSTOMER_ROUTES: Routes = [
   {
@@ -13,6 +14,6 @@ export const CUSTOMER_ROUTES: Routes = [
 
 @NgModule({
   declarations: [BookingHistoryComponent],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(CUSTOMER_ROUTES)]
+  imports: [CommonModule, SharedModule, RouterModule.forChild(CUSTOMER_ROUTES), ClickWithWarningDirective, TooltipDirective]
 })
 export class CustomerModule {}

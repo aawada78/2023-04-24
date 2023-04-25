@@ -36,8 +36,18 @@ export class FlightService {
   }
 
   delay(): void {
-    const date = new Date(this.flights[0].date);
-    date.setTime(date.getTime() + 1000 * 60 * 15);
-    this.flights[0].date = date.toISOString();
+    // const date = new Date(this.flights[0].date);
+    // date.setTime(date.getTime() + 1000 * 60 * 15);
+    // this.flights[0].date = date.toISOString();
+
+    const oldFlights = this.flights;
+    const oldFlight = oldFlights[0];
+    const oldDate = new Date(oldFlight.date);
+
+    const newDate = new Date(oldDate.getTime() + 1000 * 60 * 15);
+    const newFlight = { ...oldFlight, date: newDate.toISOString() };
+    // const newFlights = [newFlight, ...oldFlights.slice(1)];
+    // this.flights = newFlights;
+    this.flights[0] = newFlight;
   }
 }
