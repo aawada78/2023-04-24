@@ -3,7 +3,10 @@
 <div class="wrapper">
 
   <div class="sidebar" data-active-color="danger" data-color="white">
-    <app-sidebar-cmp></app-sidebar-cmp>
+    <app-sidebar-cmp>
+      <!-- Benannten Platzhalter hinzufügen: -->
+      <router-outlet name="aux"></router-outlet>
+    </app-sidebar-cmp>
   </div>
 
   <div class="main-panel">
@@ -13,8 +16,7 @@
 
       <router-outlet></router-outlet>
 
-      <!-- Benannten Platzhalter hinzufügen: -->
-      <router-outlet name="aux"></router-outlet>
+
 
     </div>
   </div>

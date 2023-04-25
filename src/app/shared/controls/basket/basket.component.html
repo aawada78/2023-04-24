@@ -1,0 +1,4 @@
+<h4>Basket</h4>
+<!-- <a (click)="close()">x</a> -->
+<a [routerLink]="['/', { outlets: { aux: null } }]">x</a>
+<pre>{{ basketService.basket$ | async | json }}</pre>
