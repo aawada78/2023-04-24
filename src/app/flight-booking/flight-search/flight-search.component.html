@@ -37,10 +37,13 @@
     <label>Date:</label>
     <!-- <input [(ngModel)]="date" appDateCva class="form-control"> -->
     <app-date [(ngModel)]="date" name="date"></app-date>
+    <p>(Control Value: {{ date | date : "dd.MM.yyyy HH:mm" }})</p>
+    <button (click)="skipToPrevWeek()" class="btn btn-default"> &lt;&lt; </button>
+    <button (click)="skipToNextWeek()" class="btn btn-default"> &gt;&gt; </button>
   </div>
 
   <div class="form-group">
-    <input [(ngModel)]="delayFilter" id="delayFilter" type="checkbox">
+    <input [(ngModel)]="delayFilter" name="delayFilter" id="delayFilter" type="checkbox">
     &nbsp;
     <label for="delayFilter">Delayed</label>
   </div>
