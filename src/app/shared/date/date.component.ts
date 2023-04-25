@@ -1,11 +1,17 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, Self, forwardRef, inject } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, NgControl, NgModel } from '@angular/forms';
+import { format } from 'date-fns';
+
+type OnChange = (value: Date) => void;
+type OnTouched = () => void;
 
 @Component({
   selector: 'app-date',
   templateUrl: './date.component.html',
-  styleUrls: ['./date.component.scss']
+  styleUrls: ['./date.component.scss'],
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateComponent), multi: true }]
 })
-export class DateComponent implements OnInit, OnChanges {
+export class DateComponent implements OnInit, OnChanges, ControlValueAccessor {
   @Input() date: string | null = null;
   @Output() dateChange = new EventEmitter<string>();
 
@@ -15,8 +21,36 @@ export class DateComponent implements OnInit, OnChanges {
   hour: number | null = null;
   minute: number | null = null;
 
+  _disabled?: boolean = false;
+  // ngControl = inject(NgControl);
+
+  // constructor(private ngControl: NgControl) {
   constructor() {
     console.debug('date in constructor', this.date);
+    // this.ngControl.valueAccessor = this;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  _onChange: OnChange = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  _onTouched: OnTouched = () => {};
+
+  writeValue(dateString: string): void {
+    const date = new Date(dateString);
+    const formattedDate = date ? format(date, 'dd:MM:yyyy') : '';
+    this.date = formattedDate;
+  }
+  registerOnChange(fn: any): void {
+    // eslint-disable-next-line no-underscore-dangle
+    this._onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    // eslint-disable-next-line no-underscore-dangle
+    // this._onTouched = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    // eslint-disable-next-line no-underscore-dangle
+    this._disabled = isDisabled;
   }
 
   ngOnInit() {
@@ -36,6 +70,9 @@ export class DateComponent implements OnInit, OnChanges {
     this.year = date.getFullYear();
     this.hour = date.getHours();
     this.minute = date.getMinutes();
+
+    // eslint-disable-next-line no-underscore-dangle
+    this._onChange(date);
   }
 
   apply() {

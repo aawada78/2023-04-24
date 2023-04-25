@@ -7,8 +7,8 @@
 <form #f="ngForm">
   <div class="form-group">
     <label>From:</label>
-    <input [(ngModel)]="from" [ngModelOptions]="{ updateOn: 'change'}" appCity class="form-control" minlength="3" name="from"
-           required>
+    <input [(ngModel)]="from" [ngModelOptions]="{ updateOn: 'change'}" appCity class="form-control" minlength="3"
+      name="from" required>
   </div>
 
   <div *ngIf="!f?.controls?.from?.valid" class="error">
@@ -31,7 +31,12 @@
 
   <div class="form-group">
     <label>To:</label>
-    <input [(ngModel)]="to" class="form-control">
+    <input [(ngModel)]="to" name="to" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Date:</label>
+    <!-- <input [(ngModel)]="date" appDateCva class="form-control"> -->
+    <app-date [(ngModel)]="date" name="date"></app-date>
   </div>
 
   <div class="form-group">

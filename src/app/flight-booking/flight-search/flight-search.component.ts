@@ -12,6 +12,7 @@ import { FlightService } from '../flight.service';
 export class FlightSearchComponent {
   from = 'Hamburg';
   to = 'Graz';
+  date = new Date().toISOString();
   selectedFlight: Flight | null = null;
   delayFilter = false;
 
