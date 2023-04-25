@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, Self, forwardRef, inject } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, NgControl, NgModel } from '@angular/forms';
-import { format } from 'date-fns';
+import { Component, Input, inject } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 type OnChange = (value: Date) => void;
 type OnTouched = () => void;
@@ -8,12 +7,11 @@ type OnTouched = () => void;
 @Component({
   selector: 'app-date',
   templateUrl: './date.component.html',
-  styleUrls: ['./date.component.scss'],
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateComponent), multi: true }]
+  styleUrls: ['./date.component.scss']
+  // providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateComponent), multi: true }]
 })
-export class DateComponent implements OnInit, OnChanges, ControlValueAccessor {
-  @Input() date: string | null = null;
-  @Output() dateChange = new EventEmitter<string>();
+export class DateComponent implements ControlValueAccessor {
+  @Input() date: Date | null = null;
 
   day: number | null = null;
   month: number | null = null;
@@ -22,12 +20,11 @@ export class DateComponent implements OnInit, OnChanges, ControlValueAccessor {
   minute: number | null = null;
 
   _disabled?: boolean = false;
-  // ngControl = inject(NgControl);
+  ngControl = inject(NgControl);
 
-  // constructor(private ngControl: NgControl) {
   constructor() {
     console.debug('date in constructor', this.date);
-    // this.ngControl.valueAccessor = this;
+    this.ngControl.valueAccessor = this;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -35,10 +32,22 @@ export class DateComponent implements OnInit, OnChanges, ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   _onTouched: OnTouched = () => {};
 
-  writeValue(dateString: string): void {
-    const date = new Date(dateString);
-    const formattedDate = date ? format(date, 'dd:MM:yyyy') : '';
-    this.date = formattedDate;
+  onDateChange() {
+    if (!this.date) {
+      return;
+    }
+
+    this.day = this.date.getDate();
+    this.month = this.date.getMonth() + 1;
+    this.year = this.date.getFullYear();
+    this.hour = this.date.getHours();
+    this.minute = this.date.getMinutes();
+  }
+
+  writeValue(date: Date): void {
+    this.date = date;
+
+    this.onDateChange();
   }
   registerOnChange(fn: any): void {
     // eslint-disable-next-line no-underscore-dangle
@@ -46,33 +55,11 @@ export class DateComponent implements OnInit, OnChanges, ControlValueAccessor {
   }
   registerOnTouched(fn: any): void {
     // eslint-disable-next-line no-underscore-dangle
-    // this._onTouched = fn;
+    this._onTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
     // eslint-disable-next-line no-underscore-dangle
     this._disabled = isDisabled;
-  }
-
-  ngOnInit() {
-    console.debug('date in ngOnInit', this.date);
-  }
-
-  ngOnChanges() {
-    console.debug('date in ngOnChanges', this.date);
-
-    if (!this.date) {
-      return;
-    }
-
-    const date = new Date(this.date);
-    this.day = date.getDate();
-    this.month = date.getMonth() + 1;
-    this.year = date.getFullYear();
-    this.hour = date.getHours();
-    this.minute = date.getMinutes();
-
-    // eslint-disable-next-line no-underscore-dangle
-    this._onChange(date);
   }
 
   apply() {
@@ -81,6 +68,9 @@ export class DateComponent implements OnInit, OnChanges, ControlValueAccessor {
     }
 
     const date = new Date(this.year, this.month - 1, this.day, this.hour, this.minute);
-    this.dateChange.next(date.toISOString());
+    console.debug('New date in apply', date);
+    this.date = date;
+    // eslint-disable-next-line no-underscore-dangle
+    this._onChange(this.date);
   }
 }

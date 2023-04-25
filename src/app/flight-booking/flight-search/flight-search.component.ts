@@ -3,7 +3,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Flight } from '../flight';
 import { FlightService } from '../flight.service';
-import { BasketService } from 'src/app/shared';
+import { addDays, subDays } from 'date-fns';
 
 @Component({
   selector: 'app-flight-search',
@@ -13,7 +13,7 @@ import { BasketService } from 'src/app/shared';
 export class FlightSearchComponent implements OnInit {
   from = 'Hamburg';
   to = 'Graz';
-  date = new Date().toISOString();
+  date = new Date();
   selectedFlight: Flight | null = null;
   delayFilter = false;
 
@@ -50,5 +50,13 @@ export class FlightSearchComponent implements OnInit {
 
   delay(): void {
     this.flightService.delay();
+  }
+
+  skipToNextWeek(): void {
+    this.date = addDays(this.date, 7);
+  }
+
+  skipToPrevWeek(): void {
+    this.date = subDays(this.date, 7);
   }
 }
