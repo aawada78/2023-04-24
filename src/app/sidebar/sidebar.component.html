@@ -20,23 +20,23 @@
     </li>
 
     <li routerLinkActive="active">
-      <a routerLink="flight-search">
-        <p>Flights</p>
+      <a routerLink="flight-booking">
+        <p>Flight Booking</p>
       </a>
     </li>
 
     <li routerLinkActive="active">
-      <a routerLink="customer/booking-history">
-        <p>Booking History</p>
+      <a routerLink="customer">
+        <p>Customer</p>
       </a>
     </li>
 
 
-    <li routerLinkActive="active">
-      <a routerLink="passenger-search">
+    <!-- <li routerLinkActive="active">
+      <a routerLink="flight-booking/passenger-search">
         <p>Passengers</p>
       </a>
-    </li>
+    </li> -->
 
     <li routerLinkActive="active">
       <a routerLink="about">
@@ -44,5 +44,11 @@
       </a>
     </li>
 
+    <li routerLinkActive="active">
+      <a [routerLink]="[{ outlets: { aux: 'basket' }}]">
+        <p>Basket</p>
+      </a>
+    </li>
   </ul>
+  <ng-content></ng-content>
 </div>

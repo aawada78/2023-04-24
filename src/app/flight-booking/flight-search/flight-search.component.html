@@ -62,10 +62,10 @@
 
 <div class="row">
   <div *ngFor="let f of flights" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
-    <flight-card [(selected)]="basket[f.id]" [item]="f">
+    <flight-card [selected]="basket[f.id]" (selectedChange)="basketChange($event, f.id)" [item]="f">
     </flight-card>
   </div>
 </div>
 
-<b>Basket</b>
-<pre>{{ basket | json }}</pre>
+<!-- <b>Basket</b>
+<pre>{{ basket | json }}</pre> -->
