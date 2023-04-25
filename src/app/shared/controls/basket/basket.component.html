@@ -1,4 +1,14 @@
-<h4>Basket</h4>
-<!-- <a (click)="close()">x</a> -->
-<a [routerLink]="['/', { outlets: { aux: null } }]">x</a>
-<pre>{{ basketService.basket$ | async | json }}</pre>
+<div class="gray-bg"></div>
+
+<div class="flight-history">
+
+    <div class="flight-history-inside card">
+        <a class="close-btn" [routerLink]="['/', {outlets: {aux: null}}]">[X]</a>
+        <h3>Your Basket</h3>
+        <ul class="list-group" *ngIf="basketService.basket$ | async as basket">
+            <li class="list-group-item" *ngFor="let item of basket | keyvalue">
+                <p>Id: {{ item.key }} - {{ item.value }}</p>
+            </li>
+        </ul>
+    </div>
+</div>

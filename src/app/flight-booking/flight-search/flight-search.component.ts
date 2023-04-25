@@ -4,6 +4,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Flight } from '../flight';
 import { FlightService } from '../flight.service';
 import { addDays, subDays } from 'date-fns';
+import { BasketService } from 'src/app/shared';
 
 @Component({
   selector: 'app-flight-search',
