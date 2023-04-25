@@ -1,18 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  Self,
-  SimpleChanges,
-  forwardRef,
-  inject
-} from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, NgControl, NgModel } from '@angular/forms';
-import { format } from 'date-fns';
+import { Component, Input, inject } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 type OnChange = (value: Date) => void;
 type OnTouched = () => void;
