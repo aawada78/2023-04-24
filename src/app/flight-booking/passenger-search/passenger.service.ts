@@ -2,14 +2,13 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Passenger } from './passenger';
+import { AbstractPassengerService } from './abstract-passenger.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class PassengerService {
+@Injectable()
+export class PassengerService implements AbstractPassengerService {
   private url = 'http://demo.angulararchitects.io/api/passenger';
   constructor(private http: HttpClient) {
-    console.log('Default Passenger Service', this.url);
+    console.log('Passenger Service', this.url);
   }
 
   find(name: string, firstname: string): Observable<Passenger[]> {

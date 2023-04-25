@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Passenger } from './passenger';
-import { PassengerService } from './passenger.service';
+import { AbstractPassengerService } from './abstract-passenger.service';
 
 @Component({
   selector: 'app-passenger-search',
@@ -14,7 +14,7 @@ export class PassengerSearchComponent {
   passengerList$: Observable<Passenger[]> = of([]);
   selectedPassenger: Passenger | undefined;
 
-  constructor(private passengerService: PassengerService) {}
+  constructor(private passengerService: AbstractPassengerService) {}
 
   load(): void {
     this.passengerList$ = this.passengerService.find(this.name, this.firstname);
