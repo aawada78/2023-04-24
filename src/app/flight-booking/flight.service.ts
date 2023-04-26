@@ -4,9 +4,11 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Flight } from './flight';
+import { FlightBookingModule } from './flight-booking.module';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'any'
+  // providedIn: FlightBookingModule
 })
 export class FlightService {
   // We will refactor this to an observable in a later exercise!
