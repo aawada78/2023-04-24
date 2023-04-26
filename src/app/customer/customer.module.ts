@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BookingHistoryComponent } from './booking-history/booking-history.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { ClickWithWarningDirective, TooltipDirective } from '../shared';
 import { CustomerComponent } from './customer.component';
+import { BookingHistoryComponent } from './booking-history/booking-history.component';
 
 export const CUSTOMER_ROUTES: Routes = [
   {

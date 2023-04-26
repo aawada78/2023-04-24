@@ -13,7 +13,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { RouterModule } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
 import { SharedModule } from './shared/shared.module';
-import { BasketComponent } from './basket/basket.component';
 import { CustomerModule } from './customer/customer.module';
 import { environment } from 'src/environments/environment';
 
@@ -34,8 +33,8 @@ export const AUTH_API = new InjectionToken<string>('AUTH_API', {
 });
 
 @NgModule({
-  imports: [FlightBookingModule, RouterModule.forRoot(APP_ROUTES), HttpClientModule, BrowserModule, SharedModule, CustomerModule],
-  declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, AboutComponent, NotFoundComponent, BasketComponent],
+  imports: [RouterModule.forRoot(APP_ROUTES), HttpClientModule, BrowserModule, SharedModule, CustomerModule],
+  declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, AboutComponent, NotFoundComponent],
   providers: [
     // {
     //   provide: BASE_URL,
