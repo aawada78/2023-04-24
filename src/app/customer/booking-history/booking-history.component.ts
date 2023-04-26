@@ -18,8 +18,8 @@ export class BookingHistoryComponent implements OnInit {
   ];
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getKeys(row: any): string[] {
-    return Object.keys(row);
+  getKeys(): string[] {
+    return Object.keys(this.flights[0]);
   }
 
   constructor() {}

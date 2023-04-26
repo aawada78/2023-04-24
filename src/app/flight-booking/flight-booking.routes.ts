@@ -7,6 +7,8 @@ import { PassengerSearchComponent } from './passenger-search/passenger-search.co
 // Diesen Import hinzufügen
 import { FlightEditComponent } from './flight-edit/flight-edit.component';
 import { FlightBookingComponent } from './flight-booking.component';
+import { AuthGuard, AuthService, CanDeactivateGuard } from '../shared';
+import { inject } from '@angular/core';
 
 export const FLIGHT_BOOKING_ROUTES: Routes = [
   {
@@ -17,6 +19,8 @@ export const FLIGHT_BOOKING_ROUTES: Routes = [
   {
     path: 'flight-booking',
     component: FlightBookingComponent,
+    // canActivate: [() => inject(AuthService).isLoggedIn()],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -33,7 +37,8 @@ export const FLIGHT_BOOKING_ROUTES: Routes = [
       },
       {
         path: 'flight-edit/:id',
-        component: FlightEditComponent
+        component: FlightEditComponent,
+        canDeactivate: [CanDeactivateGuard]
       }
     ]
   }

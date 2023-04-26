@@ -4,8 +4,11 @@
     <app-tab title="Upcoming Flights">
         <p *ngIf="flights.length === 0">No upcoming flights!</p>
         <app-data-table [data]="flights">
+            <!-- <ng-container *ngFor="let pn of ['id', 'from', 'to', 'date']">
+                <div *appTableField="let data as pn">{{ data }}</div>
+            </ng-container> -->
 
-            <ng-container *ngFor="let pn of ['id', 'from', 'to', 'date']">
+            <ng-container *ngFor="let pn of getKeys()">
                 <div *appTableField="let data as pn">{{ data }}</div>
             </ng-container>
 

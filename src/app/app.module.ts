@@ -33,7 +33,7 @@ export const AUTH_API = new InjectionToken<string>('AUTH_API', {
 });
 
 @NgModule({
-  imports: [RouterModule.forRoot(APP_ROUTES), HttpClientModule, BrowserModule, SharedModule, CustomerModule],
+  imports: [FlightBookingModule, RouterModule.forRoot(APP_ROUTES), HttpClientModule, BrowserModule, SharedModule, CustomerModule],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, AboutComponent, NotFoundComponent],
   providers: [
     // {

@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 type OnChange = (value: Date) => void;
@@ -11,7 +11,7 @@ type OnTouched = () => void;
   // providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateComponent), multi: true }]
 })
 export class DateComponent implements ControlValueAccessor {
-  @Input() date: Date | null = null;
+  date: Date | null = null;
 
   day: number | null = null;
   month: number | null = null;

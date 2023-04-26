@@ -20,10 +20,10 @@ export const APP_ROUTES: Routes = [
     path: 'about',
     component: AboutComponent
   },
-  {
-    path: 'flight-booking',
-    loadChildren: () => import('./flight-booking/flight-booking.module').then((m) => m.FlightBookingModule)
-  },
+  // {
+  //   path: 'flight-booking',
+  //   loadChildren: () => import('./flight-booking/flight-booking.module').then((m) => m.FlightBookingModule)
+  // },
   {
     path: 'basket',
     component: BasketComponent,
