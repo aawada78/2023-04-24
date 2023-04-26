@@ -8,15 +8,16 @@ import { PassengerSearchComponent } from './passenger-search/passenger-search.co
 import { FlightEditComponent } from './flight-edit/flight-edit.component';
 import { FlightBookingComponent } from './flight-booking.component';
 import { AuthGuard, CanDeactivateGuard } from '../shared';
+import { FlightResolver } from './flight-edit/flight.resolver';
 
 export const FLIGHT_BOOKING_ROUTES: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: 'flight-booking',
+  //   pathMatch: 'full'
+  // },
   {
     path: '',
-    redirectTo: 'flight-booking',
-    pathMatch: 'full'
-  },
-  {
-    path: 'flight-booking',
     component: FlightBookingComponent,
     // canActivate: [() => inject(AuthService).isLoggedIn()],
     canActivate: [AuthGuard],
@@ -37,7 +38,10 @@ export const FLIGHT_BOOKING_ROUTES: Routes = [
       {
         path: 'flight-edit/:id',
         component: FlightEditComponent,
-        canDeactivate: [CanDeactivateGuard]
+        canDeactivate: [CanDeactivateGuard],
+        resolve: {
+          flight: FlightResolver
+        }
       }
     ]
   }

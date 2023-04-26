@@ -20,10 +20,26 @@ export const APP_ROUTES: Routes = [
     path: 'about',
     component: AboutComponent
   },
-  // {
-  //   path: 'flight-booking',
-  //   loadChildren: () => import('./flight-booking/flight-booking.module').then((m) => m.FlightBookingModule)
-  // },
+  {
+    path: 'flight-booking',
+    loadChildren: () => import('./flight-booking/flight-booking.module').then((m) => m.FlightBookingModule),
+    data: {
+      preloading: {
+        preload: true,
+        startDay: 1
+      }
+    }
+  },
+  {
+    path: 'customer',
+    loadChildren: () => import('./customer/customer.module').then((m) => m.CustomerModule),
+    data: {
+      preloading: {
+        preload: true,
+        startDay: 28
+      }
+    }
+  },
   {
     path: 'basket',
     component: BasketComponent,

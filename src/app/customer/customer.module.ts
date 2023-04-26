@@ -7,13 +7,13 @@ import { CustomerComponent } from './customer.component';
 import { BookingHistoryComponent } from './booking-history/booking-history.component';
 
 export const CUSTOMER_ROUTES: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: 'customer',
+  //   pathMatch: 'full'
+  // },
   {
     path: '',
-    redirectTo: 'customer',
-    pathMatch: 'full'
-  },
-  {
-    path: 'customer',
     component: CustomerComponent,
     children: [
       {

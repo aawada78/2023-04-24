@@ -10,11 +10,12 @@ import { FlightBookingModule } from './flight-booking/flight-booking.module';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
 import { SharedModule } from './shared/shared.module';
 import { CustomerModule } from './customer/customer.module';
 import { environment } from 'src/environments/environment';
+import { CustomPrealoadStrategy } from './custom-preaload.strategy';
 
 export const BASE_URL = new InjectionToken<string>('BASE_URL', {
   providedIn: 'root',
@@ -33,7 +34,12 @@ export const AUTH_API = new InjectionToken<string>('AUTH_API', {
 });
 
 @NgModule({
-  imports: [FlightBookingModule, RouterModule.forRoot(APP_ROUTES), HttpClientModule, BrowserModule, SharedModule, CustomerModule],
+  imports: [
+    RouterModule.forRoot(APP_ROUTES, { preloadingStrategy: CustomPrealoadStrategy }),
+    HttpClientModule,
+    BrowserModule,
+    SharedModule
+  ],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, AboutComponent, NotFoundComponent],
   providers: [
     // {
