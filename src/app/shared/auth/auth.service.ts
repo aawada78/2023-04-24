@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   login() {
-    this.userName = 'Assaad';
+    this.userName = 'Brainy Smurf';
   }
 
   logout() {

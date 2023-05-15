@@ -2,9 +2,10 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Flight } from './flight';
 import { FlightBookingModule } from './flight-booking.module';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'any'
@@ -20,9 +21,13 @@ export class FlightService {
     this.find(from, to).subscribe({
       next: (flights) => {
         this.flights = flights;
+        console.debug('Flights', flights);
       },
       error: (err) => {
         console.error('error', err);
+        console.error('Return mock flights');
+
+        this.flights = this.getMockFlights();
       }
     });
   }
@@ -60,5 +65,21 @@ export class FlightService {
     // const newFlights = [newFlight, ...oldFlights.slice(1)];
     // this.flights = newFlights;
     this.flights[0] = newFlight;
+  }
+
+  private getMockFlights(): Flight[] {
+    const mockFlights: Flight[] = [
+      { id: 3, from: 'Hamburg', to: 'Graz', date: '2023-04-18T06:55:10.3927143+00:00', delayed: false },
+      { id: 4, from: 'Hamburg', to: 'Graz', date: '2023-04-18T08:55:10.3927143+00:00', delayed: false },
+      { id: 5, from: 'Hamburg', to: 'Graz', date: '2023-04-18T11:55:10.3927143+00:00', delayed: false },
+      { id: 188, from: 'Hamburg', to: 'Graz', date: '2023-04-18T06:55:10.3927143+00:00', delayed: false },
+      { id: 185, from: 'Hamburg', to: 'Graz', date: '2023-04-25T06:55:10.3927143+00:00', delayed: false },
+      { id: 186, from: 'Hamburg', to: 'Graz', date: '2023-04-18T06:55:10.3927143+00:00', delayed: false },
+      { id: 189, from: 'Hamburg', to: 'Graz', date: '2023-04-18T06:55:10.3927143+00:00', delayed: false },
+      { id: 190, from: 'Hamburg', to: 'Graz', date: '2023-04-18T06:55:10.3927143+00:00', delayed: false },
+      { id: 191, from: 'Hamburg', to: 'Graz', date: '2023-04-20T06:55:10.3927143+00:00', delayed: false }
+    ];
+
+    return mockFlights;
   }
 }

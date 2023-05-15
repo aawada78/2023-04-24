@@ -1,9 +1,29 @@
 <h1>Flight Edit</h1>
+<form [formGroup]="form">
+  <div class="form-group">
+    <label>Id:</label>
+    <input formControlName="id" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>From:</label>
+    <input formControlName="from" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>To:</label>
+    <input formControlName="to" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Date:</label>
+    <input formControlName="date" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Delayed:</label>
+    <input formControlName="delayed" type="checkbox" class="form-control">
+  </div>
+  <div class="form-group">
+    <button [disabled]="form.invalid" class="btn btn-default" (click)="save()">Save</button>
+  </div>
+</form>
 
-<p>
-  Id: {{id}}
-</p>
-<p>
-  ShowDetail: {{id}}
-</p>
+
 <pre>{{ flight | json }}</pre>

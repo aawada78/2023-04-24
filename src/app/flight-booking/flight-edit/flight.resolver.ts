@@ -14,6 +14,7 @@ export class FlightResolver implements Resolve<Flight> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Flight | Observable<Flight> | Promise<Flight> {
     // eslint-disable-next-line @typescript-eslint/dot-notation
     const id = route.params['id'];
-    return this.flightService.findById(id).pipe(delay(2000));
+    // return this.flightService.findById(id).pipe(delay(2000));
+    return this.flightService.findById(id);
   }
 }

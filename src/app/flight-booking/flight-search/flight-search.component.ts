@@ -5,6 +5,7 @@ import { Flight } from '../flight';
 import { FlightService } from '../flight.service';
 import { addDays, subDays } from 'date-fns';
 import { BasketService } from 'src/app/shared';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-flight-search',
