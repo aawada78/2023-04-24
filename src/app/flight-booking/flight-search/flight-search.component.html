@@ -7,8 +7,8 @@
 <form #f="ngForm">
   <div class="form-group">
     <label>From:</label>
-    <input [(ngModel)]="from" [ngModelOptions]="{ updateOn: 'change'}" appCity class="form-control" minlength="3" name="from"
-           required>
+    <input [(ngModel)]="from" [ngModelOptions]="{ updateOn: 'change'}" appCity class="form-control" minlength="3"
+      name="from" required>
   </div>
 
   <div *ngIf="!f?.controls?.from?.valid" class="error">
@@ -31,11 +31,19 @@
 
   <div class="form-group">
     <label>To:</label>
-    <input [(ngModel)]="to" class="form-control">
+    <input [(ngModel)]="to" name="to" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Date:</label>
+    <!-- <input [(ngModel)]="date" appDateCva class="form-control"> -->
+    <app-date [(ngModel)]="date" name="date"></app-date>
+    <p>(Control Value: {{ date | date : "dd.MM.yyyy HH:mm" }})</p>
+    <button (click)="skipToPrevWeek()" class="btn btn-default"> &lt;&lt; </button>
+    <button (click)="skipToNextWeek()" class="btn btn-default"> &gt;&gt; </button>
   </div>
 
   <div class="form-group">
-    <input [(ngModel)]="delayFilter" id="delayFilter" type="checkbox">
+    <input [(ngModel)]="delayFilter" name="delayFilter" id="delayFilter" type="checkbox">
     &nbsp;
     <label for="delayFilter">Delayed</label>
   </div>
@@ -54,10 +62,10 @@
 
 <div class="row">
   <div *ngFor="let f of flights" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
-    <flight-card [(selected)]="basket[f.id]" [item]="f">
+    <flight-card [selected]="basket[f.id]" (selectedChange)="basketChange($event, f.id)" [item]="f">
     </flight-card>
   </div>
 </div>
 
-<b>Basket</b>
-<pre>{{ basket | json }}</pre>
+<!-- <b>Basket</b>
+<pre>{{ basket | json }}</pre> -->

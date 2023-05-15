@@ -1,24 +1,65 @@
 // src/app/flight-card/flight-card.component.ts
 
-import { Component, ElementRef, EventEmitter, Input, NgZone, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  NgZone,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { Flight } from '../flight';
+import { BehaviorSubject, of } from 'rxjs';
 
 @Component({
   selector: 'flight-card',
   templateUrl: './flight-card.component.html',
-  styleUrls: ['./flight-card.component.scss']
+  styleUrls: ['./flight-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightCardComponent implements OnInit, OnChanges {
   @Input() item: Flight | null = null;
   @Input() selected = false;
   @Output() selectedChange = new EventEmitter<boolean>();
+  status = 0;
+  status$ = new BehaviorSubject<number>(0);
 
-  constructor(private element: ElementRef, private zone: NgZone) {
+  constructor(private element: ElementRef, private zone: NgZone, private cdr: ChangeDetectorRef) {
     console.debug('ctor', this.item);
   }
 
   ngOnInit() {
     console.debug('ngOnInit', this.item);
+
+    if (this.item && this.item.id > 3) {
+      return;
+    }
+
+    setTimeout(() => {
+      this.status++;
+      this.status$.next(this.status);
+      // this.cdr.detectChanges();
+      setTimeout(() => {
+        this.status++;
+        this.status$.next(this.status);
+        // this.cdr.detectChanges();
+        setTimeout(() => {
+          this.status++;
+          this.status$.next(this.status);
+          // this.cdr.detectChanges();
+          setTimeout(() => {
+            this.status++;
+            this.status$.next(this.status);
+            // this.cdr.detectChanges();
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    }, 1000);
   }
 
   ngOnChanges(changes: SimpleChanges) {

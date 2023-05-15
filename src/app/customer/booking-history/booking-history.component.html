@@ -1,0 +1,67 @@
+<h1>Booking History</h1>
+
+<app-tabbed-pane #tabbedPane>
+    <app-tab title="Upcoming Flights">
+        <p *ngIf="flights.length === 0">No upcoming flights!</p>
+        <app-data-table [data]="flights">
+            <!-- <ng-container *ngFor="let pn of ['id', 'from', 'to', 'date']">
+                <div *appTableField="let data as pn">{{ data }}</div>
+            </ng-container> -->
+
+            <ng-container *ngFor="let pn of getKeys()">
+                <div *appTableField="let data as pn">{{ data }}</div>
+            </ng-container>
+
+            <!-- <div *appTableField="let data as 'id'">{{ data }}</div>
+            <div *appTableField="let data as 'from'">{{ data }}</div>
+            <div *appTableField="let data as 'to'">{{ data }}</div>
+            <div *appTableField="let data as 'date'">{{ data | date: 'dd.MM.yyyy HH:mm' }}</div> -->
+        </app-data-table>
+    </app-tab>
+
+    <app-tab title="Operated Flights">
+        <p>No operated flights!</p>
+    </app-tab>
+
+    <app-tab title="Cancelled Flights">
+        <p>No cancelled flights!</p>
+    </app-tab>
+</app-tabbed-pane>
+
+<div>
+    <button class="bla" (appClickWithWarning)="delete()" warningMessage="Something will be deleted. Sure?">Delete
+        Danger</button>
+    <a class="bla" (appClickWithWarning)="delete()" warningMessage="Something will be deleted. Sure?">Delete
+        Anchor</a>
+</div>
+<div [appTooltip]="simpleTemplate">
+    <input />
+
+    <ng-template #simpleTemplate let-title let-description="description" let-link="helpLink">
+        <h3>{{ title }}</h3>
+        <p>{{ description }}</p>
+        <a [href]="link">Google</a>
+    </ng-template>
+</div>
+
+<div>
+    <ng-container *ngTemplateOutlet="helloguys"></ng-container>
+    <ng-container
+        *ngTemplateOutlet="helloguys2; context: { name: 'guys2', desc: 'I have now a binding!'}"></ng-container>
+    <ng-container *ngTemplateOutlet="helloguys3; context: contextInfo"></ng-container>
+    <ng-container *ngComponentOutlet="outletComponent"></ng-container>
+</div>
+<div>
+    <ng-template #helloguys>
+        <h3>Hello guys</h3>
+        <p>I am the empty template!</p>
+    </ng-template>
+    <ng-template #helloguys2 let-bla="name" let-desc="desc">
+        <h3>Hello {{ bla }}</h3>
+        <p>{{ desc }}</p>
+    </ng-template>
+    <ng-template #helloguys3 let-guys let-desc="desc">
+        <h3>Hello {{ guys }}</h3>
+        <p>{{ desc }}</p>
+    </ng-template>
+</div>
